@@ -1,3 +1,31 @@
+# Application RH (Gestion des ressources humaines)
+
+Module RH ajouté à ce projet Laravel, accessible sur **`/rh`** :
+
+- **Tableau de bord** : effectif, employés actifs, départements, congés en attente, employés en congé aujourd'hui, masse salariale.
+- **Départements** : ajout / modification / suppression (bloquée si le département contient des employés).
+- **Employés** : fiche complète (matricule, CIN, poste, salaire, statut…), recherche et filtres par département / statut.
+- **Congés** : demandes (annuel, maladie, maternité, sans solde…), approbation / refus, contrôle des chevauchements
+  et du solde annuel (18 jours par défaut, `Conge::SOLDE_ANNUEL`).
+
+### Installation
+
+```bash
+composer install
+cp .env.example .env && php artisan key:generate
+# configurer la base de données dans .env, puis :
+php artisan migrate --seed   # --seed crée des données de démonstration
+php artisan serve            # puis ouvrir http://localhost:8000/rh
+```
+
+### Tests
+
+```bash
+php artisan test   # utilise SQLite en mémoire
+```
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
