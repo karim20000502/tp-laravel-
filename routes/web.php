@@ -26,3 +26,20 @@ Route::post('/',[StagiaireController::class,'create']);
 Route::get('create',[StagiaireController::class,'create']);
 Route::post('create',[StagiaireController::class,'store']);
 Route::get('show/{id}',[StagiaireController::class,'show']);
+
+/*
+|--------------------------------------------------------------------------
+| Application RH (Gestion des ressources humaines)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('rh')->name('rh.')->group(function () {
+    Route::get('/', \App\Http\Controllers\RH\DashboardController::class)->name('dashboard');
+    Route::resource('departements', \App\Http\Controllers\RH\DepartementController::class);
+    Route::resource('employes', \App\Http\Controllers\RH\EmployeController::class)
+        ->parameters(['employes' => 'employe']);
+    Route::resource('conges', \App\Http\Controllers\RH\CongeController::class)
+        ->only(['index', 'create', 'store', 'destroy'])
+        ->parameters(['conges' => 'conge']);
+    Route::patch('conges/{conge}/approuver', [\App\Http\Controllers\RH\CongeController::class, 'approuver'])->name('conges.approuver');
+    Route::patch('conges/{conge}/refuser', [\App\Http\Controllers\RH\CongeController::class, 'refuser'])->name('conges.refuser');
+});
